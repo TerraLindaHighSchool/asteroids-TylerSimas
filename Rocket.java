@@ -25,13 +25,14 @@ public class Rocket extends SmoothMover
     {
         reloadDelayCount = 5;
     }
-
+    
     /**
      * Do what a rocket's gotta do. (Which is: mostly flying about, and turning,
      * accelerating and shooting when the right keys are pressed.)
      */
     public void act()
     {
+        move(1);
         checkKeys();
         reloadDelayCount++;
     }
@@ -44,6 +45,16 @@ public class Rocket extends SmoothMover
         if (Greenfoot.isKeyDown("space")) 
         {
             fire();
+        }
+        
+        if (Greenfoot.isKeyDown("left")) 
+        {
+            turn(-5);
+        }
+        
+        if (Greenfoot.isKeyDown("right")) 
+        {
+            turn(5);
         }
     }
     

@@ -31,6 +31,7 @@ public abstract class SmoothMover extends Actor
     public SmoothMover(Vector velocity)
     {
         this.velocity = velocity;
+        addToVector(new Vector(180, .1));
     }
     
     /**
