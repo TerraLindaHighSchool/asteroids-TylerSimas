@@ -32,7 +32,7 @@ public class Rocket extends SmoothMover
      */
     public void act()
     {
-        move(1);
+        move();
         checkKeys();
         reloadDelayCount++;
     }
@@ -56,6 +56,8 @@ public class Rocket extends SmoothMover
         {
             turn(5);
         }
+        
+        ignite(Greenfoot.isKeyDown("up"));
     }
     
     /**
@@ -72,4 +74,17 @@ public class Rocket extends SmoothMover
         }
     }
     
-}
+    private void ignite(boolean boosterOn)
+    {
+        if(boosterOn)
+        {
+            setImage("rocketWithThrust.png");
+            addToVelocity(new Vector((getRotation()), 0.1));
+            move();
+        }
+        else
+        {
+            setImage("rocket.png");
+        }
+    }
+} 
