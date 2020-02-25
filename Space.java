@@ -59,7 +59,7 @@ public class Space extends World
         {
             int x = Greenfoot.getRandomNumber(getWidth());
             int y = Greenfoot.getRandomNumber(getHeight());
-            int size = Greenfoot.getRandomNumber(5);
+            int size = Greenfoot.getRandomNumber(2) + 2;
             int a = Greenfoot.getRandomNumber(155);
             background.setColor(new Color(a + 30, a, a));
             background.fillOval(x, y, size, size);
