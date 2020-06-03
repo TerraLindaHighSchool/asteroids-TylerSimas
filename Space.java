@@ -27,7 +27,7 @@ public class Space extends World
         background.setColor(Color.BLACK);
         background.fill();
 
-        setPaintOrder(Rocket.class, Earth.class, Asteroid.class, Star.class);
+        setPaintOrder(Rocket.class, Bullet.class, AlienBullet.class, Earth.class, Asteroid.class, Star.class);
 
         star();
 
@@ -46,8 +46,17 @@ public class Space extends World
         for(int i = 0; i < count; i++) 
         {
             int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight()/2);
-            addObject(new Asteroid(), x, 0);
+            int sizeOfAsteroid = Greenfoot.getRandomNumber(5) * 5 + 50;
+            addObject(new Asteroid(sizeOfAsteroid), x, 0);
+        }
+    }
+    
+    private void addAliens(int count)
+    {
+        for(int i = 0; i < count; i++)
+        {
+            int x = Greenfoot.getRandomNumber(getWidth());
+            addObject(new Alien(), x, 0);
         }
     }
     
@@ -100,11 +109,12 @@ private void star()
     
     public void act()
     {
-        if(getObjects(Asteroid.class).size() == 0)
+        if(getObjects(Asteroid.class).size() == 0 && getObjects(Alien.class).size() == 0)
         {
             totalWaves++;
             updateWave(1);
             addAsteroids(totalWaves);
+            addAliens(totalWaves / 3);
         }
         
         for(int i = 0; i < 210; i++)

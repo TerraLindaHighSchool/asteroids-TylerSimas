@@ -14,8 +14,6 @@ public class Bullet extends SmoothMover
     /** A bullet looses one life each act, and will disappear when life = 0 */
     private int life = 30;
     
-    private static final int pointsToAdd = 2;
-    
     /**
      * Default constructor for testing.
      */
@@ -39,13 +37,25 @@ public class Bullet extends SmoothMover
      */
     public void act()
     {
+        Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
         if(life <= 0) {
             getWorld().removeObject(this);
         } 
         else {
-            life--;
             move();
-            checkAsteroidHit();
+            if (asteroid != null && life > 0)
+            {
+                getWorld().removeObject(this);
+                asteroid.hit(damage);
+            }
+            
+            if(alien != null && life > 0)
+            {
+                getWorld().removeObject(this);
+                alien.alienHit();
+            }
+            life--;
         }
     }
     
@@ -59,6 +69,16 @@ public class Bullet extends SmoothMover
         {
             getWorld().removeObject(this);
             asteroid.hit(damage);
+        }
+    }
+    
+    private void checkAlienHit()
+    {
+        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
+        if(alien != null)
+        {
+            getWorld().removeObject(this);
+            alien.alienHit();
         }
     }
 }

@@ -14,9 +14,11 @@ public class Rocket extends SmoothMover
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
     
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
+    private int xPosition;
+    private int yPosition;
     
-    private GreenfootImage rocket = new GreenfootImage("rocket.png");    
-    private GreenfootImage rocketWithThrust = new GreenfootImage("rocketWithThrust.png");
+    private GreenfootImage rocket = new GreenfootImage("Orange Spaceship.png");
+    private GreenfootImage rocketWithThrust = new GreenfootImage("Orange Spaceship Engines.png");
     
     private static boolean dead = false;
 
@@ -81,23 +83,46 @@ public class Rocket extends SmoothMover
     {
         if(boosterOn)
         {
-            setImage("rocketWithThrust.png");
+            setImage(rocketWithThrust);
             addToVelocity(new Vector((getRotation()), 0.05));
             move();
         }
         else
         {
-            setImage("rocket.png");
+            setImage(rocket);
         }
     }
     
     private void checkCollision()
     {
-        if( getOneIntersectingObject(Asteroid.class) != null)
+        Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
+        AlienBullet alienbullet = (AlienBullet) getOneIntersectingObject(AlienBullet.class);
+        
+        if( asteroid != null)
         {
             Space space = (Space ) getWorld();
             space.addObject(new Explosion(),getX(),getY());
             setDead(true);
+            space.removeObject(asteroid);
+            space.removeObject(this);
+        }
+        
+        if( alien != null)
+        {
+            Space space = (Space ) getWorld();
+            space.addObject(new Explosion(),getX(),getY());
+            setDead(true);
+            space.removeObject(alien);
+            space.removeObject(this);
+        }
+        
+        if( alienbullet != null)
+        {
+            Space space = (Space ) getWorld();
+            space.addObject(new Explosion(),getX(),getY());
+            setDead(true);
+            space.removeObject(alienbullet);
             space.removeObject(this);
         }
     }
@@ -111,4 +136,5 @@ public class Rocket extends SmoothMover
     {
         this.dead = dead;
     }
+
 } 

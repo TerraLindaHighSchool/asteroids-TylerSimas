@@ -20,7 +20,7 @@ public class Asteroid extends SmoothMover
      */
     public Asteroid()
     {
-        this(50);
+        this(75);
     }
     
     /**
@@ -87,7 +87,7 @@ public class Asteroid extends SmoothMover
     {
         Greenfoot.playSound("Explosion.wav");
         
-        if (size <= 16) {
+        if (size <= 30) {
             getWorld().removeObject(this);
         }
         else {

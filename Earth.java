@@ -16,6 +16,15 @@ public class Earth extends SmoothMover
     
     private boolean beginCount = false;
     
+    public Earth()
+    {
+        GreenfootImage image = getImage();
+        image.scale(100, 100);
+        
+        Rocket rocket = new Rocket();
+        rocket.setDead(false);
+    }
+    
     /**
      * Act - do whatever the Earth wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -32,7 +41,10 @@ public class Earth extends SmoothMover
    
     private void checkCollision()
     {
-        if( getOneIntersectingObject(Asteroid.class) != null)
+        Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
+        
+        if( asteroid != null)
         {
             Space space = (Space ) getWorld();
             space.addObject(new Explosion(),getX(),getY());
@@ -40,6 +52,13 @@ public class Earth extends SmoothMover
             space.gameOver();
         }
         
+        if( alien != null)
+        {
+            Space space = (Space ) getWorld();
+            space.addObject(new Explosion(),getX(),getY());
+            getWorld().removeObject(this);
+            space.gameOver();
+        }
     }
     
     public void respawn()
@@ -50,8 +69,9 @@ public class Earth extends SmoothMover
                beginCount = true;
                    if(respawnDelayCount >= respawn)
                {
-                   getWorld().addObject(new Rocket(), 295, 260);
+                   getWorld().addObject(new Rocket(), getX(), getY());
                    rocket.setDead(false);
+                   respawnDelayCount = 0;
                    beginCount = false;
                 }
             }
