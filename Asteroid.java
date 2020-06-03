@@ -28,7 +28,7 @@ public class Asteroid extends SmoothMover
      */
     public Asteroid(int size)
     {
-        super(new Vector(Greenfoot.getRandomNumber(360), 2));
+        super(new Vector(Greenfoot.getRandomNumber(360), 0.5f));
         setSize(size);
     }
     

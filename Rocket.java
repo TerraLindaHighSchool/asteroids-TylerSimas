@@ -12,11 +12,13 @@ import greenfoot.*;
 public class Rocket extends SmoothMover
 {
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
-
+    
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
     
     private GreenfootImage rocket = new GreenfootImage("rocket.png");    
     private GreenfootImage rocketWithThrust = new GreenfootImage("rocketWithThrust.png");
+    
+    private static boolean dead = false;
 
     /**
      * Initialise this rocket.
@@ -80,7 +82,7 @@ public class Rocket extends SmoothMover
         if(boosterOn)
         {
             setImage("rocketWithThrust.png");
-            addToVelocity(new Vector((getRotation()), 0.1));
+            addToVelocity(new Vector((getRotation()), 0.05));
             move();
         }
         else
@@ -95,8 +97,18 @@ public class Rocket extends SmoothMover
         {
             Space space = (Space ) getWorld();
             space.addObject(new Explosion(),getX(),getY());
+            setDead(true);
             space.removeObject(this);
-            space.gameOver();
         }
+    }
+    
+    public static boolean getDead()
+    {
+        return dead;
+    }
+    
+    public void setDead(boolean dead)
+    {
+        this.dead = dead;
     }
 } 

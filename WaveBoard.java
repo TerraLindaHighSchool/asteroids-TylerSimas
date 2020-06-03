@@ -7,7 +7,7 @@ import greenfoot.*;
  * @author M Kölling
  * @version 1.1
  */
-public class ScoreBoard extends Actor
+public class WaveBoard extends Actor
 {
     public static final float FONT_SIZE = 48.0f;
     public static final int WIDTH = 400;
@@ -16,7 +16,7 @@ public class ScoreBoard extends Actor
     /**
      * Create a score board with dummy result for testing.
      */
-    public ScoreBoard()
+    public WaveBoard()
     {
         this(100);
     }
@@ -24,15 +24,15 @@ public class ScoreBoard extends Actor
     /**
      * Create a score board for the final result.
      */
-    public ScoreBoard(int score)
+    public WaveBoard(int wave)
     {
-        makeImage("Game Over", "Score: ", score);
+        makeImage("Game Over", "Wave: ", wave);
     }
 
     /**
      * Make the score board image.
      */
-    private void makeImage(String title, String prefix, int score)
+    private void makeImage(String title, String prefix, int wave)
     {
         GreenfootImage image = new GreenfootImage(WIDTH, HEIGHT);
 
@@ -45,7 +45,7 @@ public class ScoreBoard extends Actor
         image.setFont(font);
         image.setColor(Color.WHITE);
         image.drawString(title, 60, 100);
-        image.drawString(prefix + score, 60, 200);
+        image.drawString(prefix + wave, 60, 200);
         setImage(image);
     }
 }
