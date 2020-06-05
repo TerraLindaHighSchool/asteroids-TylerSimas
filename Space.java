@@ -1,14 +1,15 @@
 import greenfoot.*;
 
 /**
- * Space. Something for rockets to fly in.
+ * @description Space. Something for rockets to fly in.
  * 
- * @author Michael Kölling
- * @version 1.1
+ * @author Tyler S
+ * @version 2.0
  */
 public class Space extends World
 {
     private Counter waveCounter;
+    private Counter enemyCounter;
     public  int totalWaves = 1;
     private int startAsteroids = 1;
     
@@ -32,9 +33,9 @@ public class Space extends World
         star();
 
         Explosion.initializeImages();
-        ProtonWave.initializeImages();
         
         prepare();
+        
     }
 
     /**
@@ -109,6 +110,8 @@ private void star()
     
     public void act()
     {
+        updateEnemies(getObjects(Asteroid.class).size() + getObjects(Alien.class).size());
+        
         if(getObjects(Asteroid.class).size() == 0 && getObjects(Alien.class).size() == 0)
         {
             totalWaves++;
@@ -129,6 +132,11 @@ private void star()
     public void updateWave(int addToWave)
     {
         waveCounter.add(addToWave); 
+    }
+    
+    public void updateEnemies(int enemiesInScene)
+    {
+        enemyCounter.setValue(enemiesInScene);
     }
 
     /**
@@ -159,7 +167,10 @@ private void star()
         star();
 
         waveCounter = new Counter("Wave: ");
-        addObject(waveCounter, 60, 480);
+        addObject(waveCounter, 100, 480);
+        
+        enemyCounter = new Counter("Enemies: ");
+        addObject(enemyCounter, 500, 480);
         
         updateWave(1);
     }

@@ -1,17 +1,12 @@
 import greenfoot.*;
 
 /**
- * A variation of an actor that maintains precise location (using doubles for the co-ordinates
+ * @description A variation of an actor that maintains precise location (using doubles for the co-ordinates
  * instead of ints). It also maintains a current velocity in form of a velocity vector.
+
+ * @author Tyler S
  * 
- * This is a variation of the SmoothMover class presented ealier in the book (version 2.0).
- * This version implements wrap-around movement: when the actor moves out of the world at one
- * side, it enters it again at the opposite edge.
- * 
- * @author Poul Henriksen
- * @author Michael Kölling
- * 
- * @version 2.3
+ * @version 2.0
  */
 public abstract class SmoothMover extends Actor
 {

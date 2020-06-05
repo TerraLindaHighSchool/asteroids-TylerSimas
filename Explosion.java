@@ -1,11 +1,11 @@
 import greenfoot.*;
 
 /**
- * An explosion. It starts by expanding and then collapsing. 
+ * @description An explosion. It starts by expanding and then collapsing. 
  * The explosion will explode other obejcts that the explosion intersects.
  * 
- * @author Poul Henriksen
- * @version 1.0.1
+ * @author Tyler S
+ * @version 2.0
  */
 public class Explosion extends Actor
 {

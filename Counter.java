@@ -3,12 +3,12 @@ import greenfoot.*;
 /**
  * A Counter class that allows you to display a numerical value on screen.
  * 
- * The Counter is an actor, so you will need to create it, and then add it to
+ * @description The Counter is an actor, so you will need to create it, and then add it to
  * the world in Greenfoot.  If you keep a reference to the Counter then you
  * can adjust its value.
  * 
- * @author Neil Brown and Michael Kölling 
- * @version 1.1
+ * @author Tyler S
+ * @version 2.0
  */
 public class Counter extends Actor
 {
@@ -97,7 +97,7 @@ public class Counter extends Actor
         
         if (text.getWidth() > image.getWidth() - 20)
         {
-            image.scale(text.getWidth() + 20, image.getHeight());
+            image.scale(image.getWidth() * 2, image.getHeight());
         }
         
         image.drawImage(text, (image.getWidth()-text.getWidth())/2, 

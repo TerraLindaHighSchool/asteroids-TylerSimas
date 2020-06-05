@@ -1,11 +1,11 @@
 import greenfoot.*;
 
 /**
- * The ScoreBoard is used to display results on the screen. It can display some
- * text and a score.
+ * The WaveBoard is used to display results on the screen. It can display some
+ * text and the wave the player was on.
  * 
- * @author M Kölling
- * @version 1.1
+ * @author Tyler S
+ * @version 2.0
  */
 public class WaveBoard extends Actor
 {

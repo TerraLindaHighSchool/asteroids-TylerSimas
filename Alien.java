@@ -1,16 +1,21 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Alien here.
+ * @description Aliens that will shoot at the player.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tyler S 
+ * @version 2.0
  */
 public class Alien extends SmoothMover
 {
     private static final int alienReloadTime = 300;
     
     private int alienReloadDelay = 0;
+    
+    public Alien()
+    {
+        super(new Vector(Greenfoot.getRandomNumber(360), 0.5f));
+    }
     
     /**
      * Act - do whatever the Alien wants to do. This method is called whenever
@@ -38,16 +43,16 @@ public class Alien extends SmoothMover
         }
     }
     
-        /**
+     /**
      * Fire a bullet if the gun is ready.
      */
     private void fire() 
     {
         if (alienReloadDelay >= alienReloadTime) 
         {
-            AlienBullet alienbullet = new AlienBullet (getVelocity(), getRotation());
-            getWorld().addObject (alienbullet, getX(), getY());
-            alienbullet.move ();
+            AlienBullet alienBullet = new AlienBullet (getVelocity(), getRotation());
+            getWorld().addObject (alienBullet, getX(), getY());
+            alienBullet.move ();
             alienReloadDelay = 0;
         }
     }

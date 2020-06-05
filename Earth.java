@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Earth here.
+ * @description The Earth, protect it at all costs
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tyler S 
+ * @version 2.0
  */
 public class Earth extends SmoothMover
 {
@@ -48,7 +48,8 @@ public class Earth extends SmoothMover
         {
             Space space = (Space ) getWorld();
             space.addObject(new Explosion(),getX(),getY());
-            getWorld().removeObject(this);
+            space.removeObject(asteroid);
+            space.removeObject(this);
             space.gameOver();
         }
         
@@ -56,7 +57,8 @@ public class Earth extends SmoothMover
         {
             Space space = (Space ) getWorld();
             space.addObject(new Explosion(),getX(),getY());
-            getWorld().removeObject(this);
+            space.removeObject(alien);
+            space.removeObject(this);
             space.gameOver();
         }
     }
@@ -64,10 +66,12 @@ public class Earth extends SmoothMover
     public void respawn()
     {
         Rocket rocket = new Rocket();
+        
         if(rocket.getDead())
         {
                beginCount = true;
-                   if(respawnDelayCount >= respawn)
+               
+               if(respawnDelayCount >= respawn)
                {
                    getWorld().addObject(new Rocket(), getX(), getY());
                    rocket.setDead(false);

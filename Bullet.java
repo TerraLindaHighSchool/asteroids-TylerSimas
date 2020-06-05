@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 /**
- * A bullet that can hit asteroids.
+ * @description A bullet that can hit asteroids.
  * 
- * @author Poul Henriksen
- * @author Michael Kölling
+ * @author Tyler S
+ * @version 2.0
  */
 public class Bullet extends SmoothMover
 {
@@ -29,32 +29,30 @@ public class Bullet extends SmoothMover
         super(speed);
         setRotation(rotation);
         addToVelocity(new Vector(rotation, 15));
-        Greenfoot.playSound("EnergyGun.wav");
+        Greenfoot.playSound("RocketGun.wav");
     }
     
     /**
-     * The bullet will damage asteroids if it hits them.
+     * The bullet will damage asteroids  and destroy
+     * aliens if it hits them.
      */
     public void act()
     {
         Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
-        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
         if(life <= 0) {
             getWorld().removeObject(this);
         } 
         else {
             move();
-            if (asteroid != null && life > 0)
+            
+            if(asteroid != null) //This "if" statement is here to make sure that if an asteroid and alien are at the same coords the code will not return a nullPointerException
             {
-                getWorld().removeObject(this);
-                asteroid.hit(damage);
+                checkAsteroidHit();
+            }
+            else{
+                checkAlienHit();
             }
             
-            if(alien != null && life > 0)
-            {
-                getWorld().removeObject(this);
-                alien.alienHit();
-            }
             life--;
         }
     }
@@ -65,6 +63,7 @@ public class Bullet extends SmoothMover
     private void checkAsteroidHit()
     {
         Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+        
         if (asteroid != null)
         {
             getWorld().removeObject(this);
@@ -72,13 +71,17 @@ public class Bullet extends SmoothMover
         }
     }
     
+    /**
+     * Check to see whether we have hit an alien.
+     */
     private void checkAlienHit()
     {
-        Alien alien = (Alien) getOneIntersectingObject(Alien.class);
-        if(alien != null)
-        {
-            getWorld().removeObject(this);
-            alien.alienHit();
-        }
+           Alien alien = (Alien) getOneIntersectingObject(Alien.class);
+            
+           if(alien != null)
+           {
+               getWorld().removeObject(this);
+               alien.alienHit();
+           }
     }
 }
